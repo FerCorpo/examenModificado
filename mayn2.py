@@ -1,17 +1,20 @@
 import random
 
 def cargar_lista(nombreFichero):
-    lista=[]
-    with open(nombreFichero,"r") as fichero:
-        for linea in fichero:
-            libreria={}
-            cancion, artista,genero = linea.strip().split(" - ")
-            libreria["Nombre"]=cancion
-            libreria["Artista"]=artista
-            libreria["Genero"]=genero
-            lista.append(libreria)
-    
-    return lista
+    try:
+        lista=[]
+        with open(nombreFichero,"r") as fichero:
+            for linea in fichero:
+                libreria={}
+                cancion, artista,genero = linea.strip().split(" - ")
+                libreria["Nombre"]=cancion
+                libreria["Artista"]=artista
+                libreria["Genero"]=genero
+                lista.append(libreria)
+
+        return lista
+    except FileNotFoundError:
+        print("Ese archivo no existe")
         
 def agregar_cancion(canciones,cancion,artista,genero):
     if buscar_cancion(canciones,cancion)==False:
