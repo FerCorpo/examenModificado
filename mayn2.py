@@ -44,10 +44,13 @@ def eliminar_cancion(canciones,cancion):
         
                
 def guardar_lista(canciones,archivo):
-    with open(archivo,"w") as fichero:
-        for librerias in canciones:
-            fichero.write(f"{librerias["Nombre"]} - {librerias["Artista"]} - {librerias["Genero"]}\n")
-            #fichero.write(f"{cancion} - {artista}\n")
+    try:
+        with open(archivo,"w") as fichero:
+            #usando json.dump en este caso nos convierte nuestra lista de diccionarios a formato json en el fichero que le pasamos despues
+            #el indent=4 es para hacer que el json nos aparezca mas legible, con saltos de lineas y 4 espacios al iniciar un [] o un {} en la siguiente linea
+            json.dump(canciones,fichero,indent=4)
+    except Exception as e:
+        print(f"Ha ocurrido un error {e} al intentar guardar el archivo")
             
 def buscar_cancion(canciones,cancion):
     encontrado=False
@@ -64,7 +67,7 @@ agregar_cancion(canciones,"hello cotto","duki","trap")
 print(canciones)
 #print(buscar_cancion(canciones,"hello cotto"))
 eliminar_cancion(canciones,"hello cotto")
-guardar_lista(canciones,"playlist.txt")
+guardar_lista(canciones,"canciones.json")
 print(canciones)
 
 #try except - hecho
