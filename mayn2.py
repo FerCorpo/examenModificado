@@ -4,7 +4,7 @@ import json
 def cargar_lista(nombreFichero):
     lista=[]
     try:
-        with open(nombreFichero,"r") as fichero:
+        with open(nombreFichero,"r", encoding="utf=8") as fichero:
             #cargar contenido del json
             canciones= json.load(fichero)
             #el contenido del json lo guardamos en una variable auxiliar la cual recorremos con un for
@@ -45,10 +45,10 @@ def eliminar_cancion(canciones,cancion):
                
 def guardar_lista(canciones,archivo):
     try:
-        with open(archivo,"w") as fichero:
+        with open(archivo,"w",encoding="uft-8") as fichero:
             #usando json.dump en este caso nos convierte nuestra lista de diccionarios a formato json en el fichero que le pasamos despues
             #el indent=4 es para hacer que el json nos aparezca mas legible, con saltos de lineas y 4 espacios al iniciar un [] o un {} en la siguiente linea
-            json.dump(canciones,fichero,indent=4)
+            json.dump(canciones,fichero,indent=4, ensure_ascii=False)
     except Exception as e:
         print(f"Ha ocurrido un error {e} al intentar guardar el archivo")
             
@@ -73,4 +73,4 @@ print(canciones)
 #try except - hecho
 #Comprobar n valores del fichero - hecho
 #Crear funcion buscar_cancion(lista,nombre) - hecho
-#JSON
+#JSON - hecho
